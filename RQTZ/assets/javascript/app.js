@@ -13,16 +13,16 @@ let pageSearchApp = {
             searchField = document.getElementById("searchBox"),
             pagesContainer = document.getElementById("pagesContainer"),
             apiUrl = "https://graph.facebook.com/v2.8/search?q=",
-            access_token = "EAACEdEose0cBAIT54CqBZB17SPYHnZA0ZC6xRfHUNYnrJnlGsMqjI9DfFdhblVO8TDjGFh3hn5ZAS38cmfWmyk3ORUfSgSbAzxuZA55OFkIh5BPsblZBBGWbLxhcJs4oXGgpNLk0xd6pf1PGBV6CgWM19uqudmCiC6E9I9D8RU4IxfcZBO68bBYvwcFO36D0xWvQTzA2Kq5TQZDZD";
+            access_token = "EAACEdEose0cBAKiLW6ZBW5ZAnECoqxUGvd75sOmG937XvAEZBYtlqTWaZA0H02iykMyeIElmZBVQc4ORs5dxqLkt3kb7ZA7i2QzFjogbGYzGnJsRB0DckeAzupwwsvoTfGwVuA8olFwGVVtOYVFbrA6LEIZBJf0vCucQkqqGb6H4yYf5LlwJgwvb1jGv6ms1HGUXsQzGr6xZCQZDZD";
 
         if (searchField.value != "") {
             pagesContainer.innerHTML = "";
-            apiUrl = apiUrl + searchField.value + "&type=page&limit=25&fields=id,name,about,category,company_overview,bio,engagement,picture,overall_star_rating&access_token=" + access_token;
+            apiUrl = apiUrl + searchField.value + "&type=page&limit=6&fields=id,name,about,category,company_overview,bio,engagement,picture,overall_star_rating,page_stories&access_token=" + access_token;
             that.createAjaxRequest("GET", apiUrl, that.pageCallbackFunction);
         }
         else {
             pagesContainer.innerHTML = "<pre>\
-                                        <h1>Oops...! You forgot to enter the page!!!</h1>\
+                                        <h1>No Page name was entered.</h1>\
                                         <h1>Please enter the page to be searched...</h1>\
                                     </pre>";
         }
@@ -52,7 +52,8 @@ let pageSearchApp = {
                 response.forEach(function (resultData) {
                     var card = "";
                     console.log(resultData);
-                    card += "<div class='card' pageId=" + resultData.id + " onclick='pageSearchApp.onClickCard(this)'>";
+                    console.log("Impressions: " + resultData.page_stories);
+                    card += "<div class='card col-md-2' pageId=" + resultData.id + " onclick='pageSearchApp.onClickCard(this)'>";
                     card += "<img src='" + resultData.picture.data.url + "'>";
                     card += "<div class='card-body'>";
                     card += "<h4><b>" + resultData.name + "</b></h4>";

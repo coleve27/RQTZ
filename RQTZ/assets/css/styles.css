@@ -27,3 +27,8 @@
   .paddingBottom {
       padding-bottom: 1em;
   }
+
+  img, svg, video {
+    vertical-align: middle;
+    width: 150px;
+}
