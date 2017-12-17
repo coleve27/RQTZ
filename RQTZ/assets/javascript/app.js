@@ -87,9 +87,15 @@ let pageSearchApp = {
 
 };
 
+  var pageID = "kittiesonfleek";
+  var insights = "/" + "insights";
+  var metrics= "/" + "page_views_total";
+  var timePeriod = "/" + "days_28";
+  var accessToken = "?access_token=" + "EAAbZBeNZCvO5kBADnsHcsElOuIhwFIW8jzKWM9RbExO6ZAXEgpXQnxfZCeQGevAcb3mUgj0Bx0ufVF3BaWHmhvcFgEarrKk0KrKl9EI2O4C9ZBPZAENYByeItWxWpAbkKtiqG60W84XNrDiLjZAnfjKV7drbTgwBkWZACnxNIqTnYXFkTDci7buUkUqTuDOP7F8VIZCmx1FTtNwZDZD"
+  var queryURL = "https://graph.facebook.com/v2.11/" + pageID + insights + metrics + timePeriod + accessToken;
 
   $.ajax({
-  	url: "https://graph.facebook.com/v2.11/169918320231820?fields=fan_count%2Cpage_token%2Cinsights.metric(page_impressions)&access_token=EAAbZBeNZCvO5kBADnsHcsElOuIhwFIW8jzKWM9RbExO6ZAXEgpXQnxfZCeQGevAcb3mUgj0Bx0ufVF3BaWHmhvcFgEarrKk0KrKl9EI2O4C9ZBPZAENYByeItWxWpAbkKtiqG60W84XNrDiLjZAnfjKV7drbTgwBkWZACnxNIqTnYXFkTDci7buUkUqTuDOP7F8VIZCmx1FTtNwZDZD",
+  	url: queryURL,
   	method: "GET"
   }).done(function(response) {
   	console.log(response);
