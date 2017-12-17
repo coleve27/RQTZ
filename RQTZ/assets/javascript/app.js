@@ -89,14 +89,40 @@ let pageSearchApp = {
 
   var pageID = "kittiesonfleek";
   var insights = "/" + "insights";
-  var metrics= "/" + "page_views_total";
+  var metrics= "/" + "page_impressions";
   var timePeriod = "/" + "days_28";
-  var accessToken = "?access_token=" + "EAAbZBeNZCvO5kBADnsHcsElOuIhwFIW8jzKWM9RbExO6ZAXEgpXQnxfZCeQGevAcb3mUgj0Bx0ufVF3BaWHmhvcFgEarrKk0KrKl9EI2O4C9ZBPZAENYByeItWxWpAbkKtiqG60W84XNrDiLjZAnfjKV7drbTgwBkWZACnxNIqTnYXFkTDci7buUkUqTuDOP7F8VIZCmx1FTtNwZDZD"
-  var queryURL = "https://graph.facebook.com/v2.11/" + pageID + insights + metrics + timePeriod + accessToken;
-
+  var accessToken = "?access_token=" + "EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD"
+  var queryURLb = "https://graph.facebook.com/v2.11/" + pageID + insights + engaged_users + timePeriod + accessToken;
+  var queryURLa = "https://graph.facebook.com/v2.11/" + pageID + insights + metrics + timePeriod + accessToken;
+  var engaged_users = "/" + "page_engaged_users";
+  var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD";
+  var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD";
   $.ajax({
-  	url: queryURL,
+  	url: queryURLa,
   	method: "GET"
   }).done(function(response) {
-  	console.log(response);
+    //console.log of impressions in the last 28 days//
+  	console.log(response.data[0].values[1].value);
+    var impressions = response.data[0].values[1].value;
+    $("#impressions").text("impressions within the last 28 days: " + impressions);
+  });
+
+  $.ajax({
+    url: page_engaged_users,
+    method: "GET"
+  }).done(function(response) {
+    //console.log of impressions in the last 28 days//
+    console.log(response.data[0].values[1].value);
+    var pageEngage = response.data[0].values[1].value;
+    $("#pageEngage").text("page engagement within the last 28 days: " + pageEngage);
+  });
+
+  $.ajax({
+    url: pageFans,
+    method: "GET"
+  }).done(function(response) {
+    //console.log of impressions in the last 28 days//
+    console.log(response.data[0].values[1].value);
+    var pageFans = response.data[0].values[1].value;
+    $("#pageFans").text("page fans over lifetime of page: " + pageFans);
   });
