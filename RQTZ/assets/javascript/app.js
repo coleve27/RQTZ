@@ -13,7 +13,7 @@ let pageSearchApp = {
             searchField = document.getElementById("searchBox"),
             pagesContainer = document.getElementById("pagesContainer"),
             apiUrl = "https://graph.facebook.com/v2.11/search?q=",
-            access_token = "EAACEdEose0cBAKiLW6ZBW5ZAnECoqxUGvd75sOmG937XvAEZBYtlqTWaZA0H02iykMyeIElmZBVQc4ORs5dxqLkt3kb7ZA7i2QzFjogbGYzGnJsRB0DckeAzupwwsvoTfGwVuA8olFwGVVtOYVFbrA6LEIZBJf0vCucQkqqGb6H4yYf5LlwJgwvb1jGv6ms1HGUXsQzGr6xZCQZDZD";
+            access_token = "EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD";
 
         if (searchField.value != "") {
             pagesContainer.innerHTML = "";
@@ -72,10 +72,10 @@ let pageSearchApp = {
             }
         }
     },
-   /////////////////*Makes a div card to display the 5 results of the search query *///////////////////////////
+    /////////////////*Makes a div card to display the 5 results of the search query *///////////////////////////
 
 
-   //////////////** An utility method for making Ajax calls **//////////////////////////
+    //////////////** An utility method for making Ajax calls **//////////////////////////
     createAjaxRequest: function (method, apiUrl, callbackFn) {
         var xhttp = new XMLHttpRequest(),
             that = this;
@@ -89,67 +89,68 @@ let pageSearchApp = {
 };
 
 
-  //initiate Javascript SDK//
-  window.fbAsyncInit = function() {
+//initiate Javascript SDK//
+window.fbAsyncInit = function () {
     FB.init({
-      appId            : '1968644966792089',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v2.11'
-    });
-    FB.getLoginStatus(function(response) {
-  if (response.status === 'connected') {
-    console.log('Logged in.');
-    var pageID = "kittiesonfleek";
-    var insights = "/" + "insights";
-    var metrics= "/" + "page_impressions";
-    var timePeriod = "/" + "days_28";
-    var accessToken = "?access_token=" + "EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD"
-    var queryURLb = "https://graph.facebook.com/v2.11/" + pageID + insights + engaged_users + timePeriod + accessToken;
-    var queryURLa = "https://graph.facebook.com/v2.11/" + pageID + insights + metrics + timePeriod + accessToken;
-    var engaged_users = "/" + "page_engaged_users";
-    var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD";
-    var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD";
-    $.ajax({
-      url: queryURLa,
-      method: "GET"
-    }).done(function(response) {
-      //console.log of impressions in the last 28 days//
-      console.log(response.data[0].values[1].value);
-      var impressions = response.data[0].values[1].value;
-      $("#impressions").text("impressions within the last 28 days: " + impressions);
+        appId: '1968644966792089',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v2.11'
     });
 
-    $.ajax({
-      url: page_engaged_users,
-      method: "GET"
-    }).done(function(response) {
-      //console.log of impressions in the last 28 days//
-      console.log(response.data[0].values[1].value);
-      var pageEngage = response.data[0].values[1].value;
-      $("#pageEngage").text("page engagement within the last 28 days: " + pageEngage);
-    });
+    FB.getLoginStatus(function (response) {
+        if (response.status === 'connected') {
+            console.log('Logged in.');
+            var pageID = "kittiesonfleek";
+            var insights = "/" + "insights";
+            var metrics = "/" + "page_impressions";
+            var timePeriod = "/" + "days_28";
+            var accessToken = "?access_token=" + "EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD"
+            var queryURLb = "https://graph.facebook.com/v2.11/" + pageID + insights + engaged_users + timePeriod + accessToken;
+            var queryURLa = "https://graph.facebook.com/v2.11/" + pageID + insights + metrics + timePeriod + accessToken;
+            var engaged_users = "/" + "page_engaged_users";
+            var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD";
+            var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD";
+            $.ajax({
+                url: queryURLa,
+                method: "GET"
+            }).done(function (response) {
+                //console.log of impressions in the last 28 days//
+                console.log(response.data[0].values[1].value);
+                var impressions = response.data[0].values[1].value;
+                $("#impressions").text("impressions within the last 28 days: " + impressions);
+            });
 
-    $.ajax({
-      url: pageFans,
-      method: "GET"
-    }).done(function(response) {
-      //console.log of impressions in the last 28 days//
-      console.log(response.data[0].values[1].value);
-      var pageFans = response.data[0].values[1].value;
-      $("#pageFans").text("page fans over lifetime of page: " + pageFans);
-    });
-  }
-  else {
-    FB.login();
-  }
-});
-  };
+            $.ajax({
+                url: page_engaged_users,
+                method: "GET"
+            }).done(function (response) {
+                //console.log of impressions in the last 28 days//
+                console.log(response.data[0].values[1].value);
+                var pageEngage = response.data[0].values[1].value;
+                $("#pageEngage").text("page engagement within the last 28 days: " + pageEngage);
+            });
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
+            $.ajax({
+                url: pageFans,
+                method: "GET"
+            }).done(function (response) {
+                //console.log of impressions in the last 28 days//
+                console.log(response.data[0].values[1].value);
+                var pageFans = response.data[0].values[1].value;
+                $("#pageFans").text("page fans over lifetime of page: " + pageFans);
+            });
+        }
+        else {
+            FB.login();
+        }
+    });
+};
+
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
