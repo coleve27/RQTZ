@@ -85,101 +85,12 @@ let pageSearchApp = {
     },
 
 
-
-
 };
 
-window.fbAsyncInit = function() {
-   FB.init({
-     appId: '1968644966792089',
-     page_token: 'kittiesonfleek',
-     cookie: true,
-     xfbml: true,
-     version: 'v2.11'
-   });
 
-   FB.AppEvents.logPageView();
-
-   FB.getLoginStatus(function(response) {
-       if (response.status === 'connected') {
-         // the user is logged in and has authenticated your
-         // app, and response.authResponse supplies
-         // the user's ID, a valid access token, a signed
-         // request, and the time the access token
-         // and signed request each expire
-         var uid = response.authResponse.userID;
-         var accessToken = response.authResponse.accessToken;
-
-         console.log(accessToken);
-
-         FB.api(
-           'GET', {
-             "fields": "https://graph.facebook.com/kittiesonfleek?fields=access_token"
-
-           },
-           function(reponse) {
-             console.log(response);
-             console.log(response.authResponse.accessToken)
-             var pageToken = response.authResponse.accessToken;
-
-             FB.api(
-               '/kittiesonfleek',
-               'GET', {
-                 "fields": "fan_count,page_token,insights.metric(page_impressions)",
-                 "access_token": "EAAbZBeNZCvO5kBAH7UdgreybMufrjRvW7tbEOf9ZBMTTpvTPfeOKGzLhCMtNH58Eb25GCSFDoolCTLrUl3zZAPGpMDZBqchpAzLHZCm7Td0vbBRZBtk1fvFqtRECqcyhhG0N8w3ey7DMQvZA1c6UkdLJPF33G4YO4mLb6xFjDetAiUKQ6fklhoC2ZAbUIes7pyJYZD"
-               },
-               function(response) {
-                 console.log(response);
-               });
-
-           }
-         )
-
-     } else if (response.status === 'not_authorized') {
-       // the user is logged in to Facebook,
-       // but has not authenticated your app
-     } else {
-       // the user isn't logged in to Facebook.
-       FB.login(function(response) {
-         console.log(response);
-         if (response.authResponse) {
-           console.log('Welcome!  Fetching your information.... ');
-           FB.api('/me', function(response) {
-             console.log('Good to see you, ' + response.name + '.');
-           });
-         } else {
-           console.log('User cancelled login or did not fully authorize.');
-         }
-       }, {
-         scope: 'email,user_likes, manage_pages, publish_pages, account_linking_token',
-         return_scopes: true
-       });
-     }
-   });
- };
-
- (function(d, s, id) {
-   var js, fjs = d.getElementsByTagName(s)[0];
-   if (d.getElementById(id)) {
-     return;
-   }
-   js = d.createElement(s);
-   js.id = id;
-   js.src = "https://connect.facebook.net/en_US/sdk.js";
-   fjs.parentNode.insertBefore(js, fjs);
- }(document, 'script', 'facebook-jssdk'));
-
-
- // Only works after `FB.init` is called
- function myFacebookLogin() {
-   FB.login(function(response) {
-     if (response.authResponse) {
-       console.log('Welcome!  Fetching your information.... ');
-       FB.api('/me', function(response) {
-         console.log('Good to see you, ' + response.name + '.');
-       });
-     } else {
-       console.log('User cancelled login or did not fully authorize.');
-     }
-   });
- };
+  // $.ajax({
+  // 	url: "https://graph.facebook.com/v2.11/169918320231820?fields=fan_count%2Cpage_token%2Cinsights.metric(page_impressions)&access_token=EAAbZBeNZCvO5kBADnsHcsElOuIhwFIW8jzKWM9RbExO6ZAXEgpXQnxfZCeQGevAcb3mUgj0Bx0ufVF3BaWHmhvcFgEarrKk0KrKl9EI2O4C9ZBPZAENYByeItWxWpAbkKtiqG60W84XNrDiLjZAnfjKV7drbTgwBkWZACnxNIqTnYXFkTDci7buUkUqTuDOP7F8VIZCmx1FTtNwZDZD",
+  // 	method: "GET"
+  // }).done(function(response) {
+  // 	console.log(response);
+  // });
