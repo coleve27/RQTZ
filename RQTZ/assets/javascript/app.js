@@ -12,7 +12,7 @@ let pageSearchApp = {
         var that = this,
             searchField = document.getElementById("searchBox"),
             pagesContainer = document.getElementById("pagesContainer"),
-            apiUrl = "https://graph.facebook.com/v2.8/search?q=",
+            apiUrl = "https://graph.facebook.com/v2.11/search?q=",
             access_token = "EAACEdEose0cBAKiLW6ZBW5ZAnECoqxUGvd75sOmG937XvAEZBYtlqTWaZA0H02iykMyeIElmZBVQc4ORs5dxqLkt3kb7ZA7i2QzFjogbGYzGnJsRB0DckeAzupwwsvoTfGwVuA8olFwGVVtOYVFbrA6LEIZBJf0vCucQkqqGb6H4yYf5LlwJgwvb1jGv6ms1HGUXsQzGr6xZCQZDZD";
 
         if (searchField.value != "") {
