@@ -7,17 +7,25 @@ let pageSearchApp = {
     loader: document.getElementsByClassName("loader")[0],
 
     /** Invoked while pressing enter key on searchBox **/
+
+
     /////////////*From FACEBOOK, Api URL and Access token search tool */////////////////////
+
     onSearchFieldEnter: function (ev) {
         var that = this,
             searchField = document.getElementById("searchBox"),
             pagesContainer = document.getElementById("pagesContainer"),
             apiUrl = "https://graph.facebook.com/v2.11/search?q=",
-            access_token = "EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD";
+            access_token = "EAACEdEose0cBANvOH1v1ANsdyvFHzxLDwKi7HojHOqgoZC82kEROojWgKF9xYMAPAiVZA5smL6keONV89aXVAEJvGYrY6KGQ1lvZAnWNqvZC2p6A6e1E7jFWedZBaU9zgQNj7m20ErOfWDmo0GXsZC2ZBIeqslbgxtdwuGqQTA0BUok9pIpTS4rk2qnp8bj5Tq5Iczo7VQv5wZDZD";
+
+           // https://graph.facebook.com/v2.11/search?q=peanut&type=page&limit=6&fields=id,name,about,category,company_overview,posts, bio,engagement,picture,overall_star_rating&access_token=EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD
+
+
+
 
         if (searchField.value != "") {
             pagesContainer.innerHTML = "";
-            apiUrl = apiUrl + searchField.value + "&type=page&limit=6&fields=id,name,about,category,company_overview,bio,engagement,picture,overall_star_rating,page_stories&access_token=" + access_token;
+            apiUrl = apiUrl + searchField.value + "&type=page&limit=6&fields=id,name,about,posts,category,company_overview,bio,engagement,picture,overall_star_rating,page_stories&access_token=" + access_token;
             that.createAjaxRequest("GET", apiUrl, that.pageCallbackFunction);
         }
         else {
@@ -36,6 +44,7 @@ let pageSearchApp = {
     onClickCard: function (card) {
         window.open("http://facebook.com/" + card.getAttribute("pageid"), "_blank");
     },
+
     /** callback function for pageApi request **/
     pageCallbackFunction: function (event) {
         var that = this,
@@ -52,12 +61,17 @@ let pageSearchApp = {
                 response.forEach(function (resultData) {
                     var card = "";
                     console.log(resultData);
-                    console.log("Impressions: " + resultData.page_stories);
+                 //   console.log("post test: "+resultData.posts.data[1].created_time); // VERY IMPORTANT: Create a function that counts how many posts in the past month 
+                  //  console.log("engagement id test: "+resultData.engagement.count);
+
+
+                  console.log("Impressions: " + resultData.posts);
                     card += "<div class='card col-md-2' pageId=" + resultData.id + " onclick='pageSearchApp.onClickCard(this)'>";
                     card += "<img src='" + resultData.picture.data.url + "'>";
                     card += "<div class='card-body'>";
                     card += "<h4><b>" + resultData.name + "</b></h4>";
                     card += "<p>" + resultData.category + "</p>";
+                    card += "<p>" + resultData.posts + "</p>";
                     card += "<p>Likes: " + resultData.engagement.social_sentence + "</p>";
                     //console.log("People who Like this: " + resultData.engagement.count);
                     card += "</div>";
@@ -90,6 +104,7 @@ let pageSearchApp = {
 
 
 //initiate Javascript SDK//
+
 window.fbAsyncInit = function () {
     FB.init({
         appId: '1968644966792089',
@@ -109,8 +124,9 @@ window.fbAsyncInit = function () {
             var queryURLb = "https://graph.facebook.com/v2.11/" + pageID + insights + engaged_users + timePeriod + accessToken;
             var queryURLa = "https://graph.facebook.com/v2.11/" + pageID + insights + metrics + timePeriod + accessToken;
             var engaged_users = "/" + "page_engaged_users";
-            var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD";
-            var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=EAAbZBeNZCvO5kBAG0yifpVCtA3bZAWu8ovKV78ROcvtYzHzDJnTQfkyYHlnsJzDFJiSTTMBPderuCBZAl5EnjHE9GXe8VoJicZBXzjlKZB2JoR7SVd9LW8anKppZCIyjwu2wJZCcp1yAHxDf5ooT6dC6PLIEbso6FZAYhuYvoWC2AYw6kKAbiiK8zTkDpFaOZBI4cJnAKs1BTJHAZDZD";
+            var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD";
+            var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD";
+         
             $.ajax({
                 url: queryURLa,
                 method: "GET"
