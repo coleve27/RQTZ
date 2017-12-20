@@ -101,10 +101,10 @@ let pageSearchApp = {
 
 
 };
-=====
+
 //GET insights//
 
-var accessToken = "EAAbZBeNZCvO5kBAPm96j3GrXm9a7ypqZCJxdidZCQa9xK9qoXvF7uFTBj3bWxf2L3LpVq1EbwQRe07SYOZBhZB0lKCQsfsD3tL3sESyWo9DHKYHgez03ZB9mH1haQ4j7qNWij6xZCJOMVUPwt4lNNoAAlVPs9Eurn1ZCZAfwYUJQHNSt49dFRgrFozbHZCPv8rvgJoZD"
+var accessToken = "EAACEdEose0cBAHaqLIXJkHjdUhjpZCYa7RVJsj3pQmgEjhrmPZBJx9Lhid4pZCLi1fwcNIGB6JIAN6ATZACxD1TZCNSugUzx2ZAaV0ravxX9hXZBFV8Bs2h8Xpaofufinumzq429HvHAXKnPNGAHHMcpOA6XnHBwtZAFskwYUWofZC857lMYKnRnLZAALZBdvgZCVV0ZD"
 var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=" + accessToken;
 var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=" + accessToken;
 var impressions = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_impressions/days_28/?access_token=" + accessToken;
