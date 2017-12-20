@@ -61,7 +61,7 @@ let pageSearchApp = {
                 response.forEach(function (resultData) {
                     var card = "";
                     console.log(resultData);
-                 //   console.log("post test: "+resultData.posts.data[1].created_time); // VERY IMPORTANT: Create a function that counts how many posts in the past month 
+                 //   console.log("post test: "+resultData.posts.data[1].created_time); // VERY IMPORTANT: Create a function that counts how many posts in the past month
                   //  console.log("engagement id test: "+resultData.engagement.count);
 
 
@@ -101,72 +101,68 @@ let pageSearchApp = {
 
 
 };
+=====
+//GET insights//
+
+var accessToken = "EAAbZBeNZCvO5kBAPm96j3GrXm9a7ypqZCJxdidZCQa9xK9qoXvF7uFTBj3bWxf2L3LpVq1EbwQRe07SYOZBhZB0lKCQsfsD3tL3sESyWo9DHKYHgez03ZB9mH1haQ4j7qNWij6xZCJOMVUPwt4lNNoAAlVPs9Eurn1ZCZAfwYUJQHNSt49dFRgrFozbHZCPv8rvgJoZD"
+var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=" + accessToken;
+var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=" + accessToken;
+var impressions = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_impressions/days_28/?access_token=" + accessToken;
+
+$.ajax({
+    url: impressions,
+    method: "GET"
+}).done(function (response) {
+    //console.log of impressions in the last 28 days//
+    console.log(response.data[0].values[1].value);
+    var impressions = response.data[0].values[1].value;
+    $("#impressions").text(impressions);
+});
+
+$.ajax({
+    url: page_engaged_users,
+    method: "GET"
+}).done(function (response) {
+    //console.log of impressions in the last 28 days//
+    console.log(response.data[0].values[1].value);
+    var pageEngage = response.data[0].values[1].value;
+    $("#pageEngage").text(pageEngage);
+});
+
+$.ajax({
+    url: pageFans,
+    method: "GET"
+}).done(function (response) {
+    //console.log of impressions in the last 28 days//
+    console.log(response.data[0].values[1].value);
+    var pageFans = response.data[0].values[1].value;
+    $("#pageFans").text(pageFans);
+});
 
 
-//initiate Javascript SDK//
-
-window.fbAsyncInit = function () {
-    FB.init({
-        appId: '1968644966792089',
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v2.11'
-    });
-
-    FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-            console.log('Logged in.');
-            var pageID = "kittiesonfleek";
-            var insights = "/" + "insights";
-            var metrics = "/" + "page_impressions";
-            var timePeriod = "/" + "days_28";
-            var accessToken = "?access_token=" + "EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD"
-            var queryURLb = "https://graph.facebook.com/v2.11/" + pageID + insights + engaged_users + timePeriod + accessToken;
-            var queryURLa = "https://graph.facebook.com/v2.11/" + pageID + insights + metrics + timePeriod + accessToken;
-            var engaged_users = "/" + "page_engaged_users";
-            var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD";
-            var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD";
-         
-            $.ajax({
-                url: queryURLa,
-                method: "GET"
-            }).done(function (response) {
-                //console.log of impressions in the last 28 days//
-                console.log(response.data[0].values[1].value);
-                var impressions = response.data[0].values[1].value;
-                $("#impressions").text("impressions within the last 28 days: " + impressions);
-            });
-
-            $.ajax({
-                url: page_engaged_users,
-                method: "GET"
-            }).done(function (response) {
-                //console.log of impressions in the last 28 days//
-                console.log(response.data[0].values[1].value);
-                var pageEngage = response.data[0].values[1].value;
-                $("#pageEngage").text("page engagement within the last 28 days: " + pageEngage);
-            });
-
-            $.ajax({
-                url: pageFans,
-                method: "GET"
-            }).done(function (response) {
-                //console.log of impressions in the last 28 days//
-                console.log(response.data[0].values[1].value);
-                var pageFans = response.data[0].values[1].value;
-                $("#pageFans").text("page fans over lifetime of page: " + pageFans);
-            });
-        }
-        else {
-            FB.login();
-        }
-    });
-};
-
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+// var initiate Javascript SDK//
+// window.fbAsyncInit = function () {
+//     FB.init({
+//         appId: '1968644966792089',
+//         autoLogAppEvents: true,
+//         xfbml: true,
+//         version: 'v2.11'
+//     });
+//
+//     FB.getLoginStatus(function (response) {
+//         if (response.status === 'connected') {
+//             console.log('Logged in.');
+//         }
+//         else {
+//             FB.login();
+//         }
+//     });
+// };
+//
+// (function (d, s, id) {
+//     var js, fjs = d.getElementsByTagName(s)[0];
+//     if (d.getElementById(id)) { return; }
+//     js = d.createElement(s); js.id = id;
+//     js.src = "https://connect.facebook.net/en_US/sdk.js";
+//     fjs.parentNode.insertBefore(js, fjs);
+// }(document, 'script', 'facebook-jssdk'));
