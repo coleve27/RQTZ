@@ -15,7 +15,7 @@ let pageSearchApp = {
             pagesContainer = document.getElementById("pagesContainer"),
             apiUrl = "https://graph.facebook.com/v2.11/search?q=",
             ////UPDATE THIS ACCESS TOKEN AS NECESSARY
-            access_token = "EAACEdEose0cBAKiqU3GjvO6s6SwC8cgal19QpHDv5NLZCVvb1pKB3tRFVgLZArJ6Ao4ZAsqeI2f5fvXNSFSbJYdPNb7l6lwu1TwvB56ROeUoYIs6oDnpagmcnJgwPrQdkBDIgNRsMQu67PzTSl7oNA5YXu3KUCQxFn2YOlXFoilJj6DAAbaXEgtoe1r2JDNh8f2sih92gZDZD";
+            access_token = "EAACEdEose0cBALpage5VHkpTTiNGSKD77ajBlmSZA9A22c8o8793f5MhibubkUsMzNG08rnKOvfzmz8U0h17QuH2vA2fRZBcsnkgwSKCuKw0fl0IMdXUTophvqXCdZAOZCVtRh5MZB9nzlavCvikeYKx1YaZALbTPZCLibrjcZCV79Asp1JxMdwosDPZA3lqvzZCKdJJazVADnkQZDZD";
 
         if (searchField.value != "") {
             pagesContainer.innerHTML = "";
@@ -51,7 +51,7 @@ let pageSearchApp = {
                   //  console.log("engagement id test: "+resultData.engagement.count);
 
 
-                    card += "<div class='card col-md-2' pageId=" + resultData.id + " onclick='pageSearchApp.onClickCard(this)'>";
+                    card += "<div class='card' pageId=" + resultData.id + " onclick='pageSearchApp.onClickCard(this)'>";
                     card += "<img src='" + resultData.picture.data.url + "'>";
                     card += "<div class='card-body'>";
                     card += "<h4><b>" + resultData.name + "</b></h4>";
@@ -95,7 +95,7 @@ let pageSearchApp2 = {
             pagesContainer2 = document.getElementById("pagesContainer2"),
             apiUrl2 = "https://graph.facebook.com/v2.11/search?q=",
             ////UPDATE THIS ACCESS TOKEN AS NECESSARY
-            access_token = "EAACEdEose0cBAKiqU3GjvO6s6SwC8cgal19QpHDv5NLZCVvb1pKB3tRFVgLZArJ6Ao4ZAsqeI2f5fvXNSFSbJYdPNb7l6lwu1TwvB56ROeUoYIs6oDnpagmcnJgwPrQdkBDIgNRsMQu67PzTSl7oNA5YXu3KUCQxFn2YOlXFoilJj6DAAbaXEgtoe1r2JDNh8f2sih92gZDZD";
+            access_token = "EAACEdEose0cBALpage5VHkpTTiNGSKD77ajBlmSZA9A22c8o8793f5MhibubkUsMzNG08rnKOvfzmz8U0h17QuH2vA2fRZBcsnkgwSKCuKw0fl0IMdXUTophvqXCdZAOZCVtRh5MZB9nzlavCvikeYKx1YaZALbTPZCLibrjcZCV79Asp1JxMdwosDPZA3lqvzZCKdJJazVADnkQZDZD";
 
 
 
@@ -136,7 +136,7 @@ let pageSearchApp2 = {
                         let temp1 = resultData2.posts.data[i].created_time;
                     };
 
-                    card += "<div class='card col-md-2' pageId=" + resultData2.id + " onclick='pageSearchApp2.onClickCard(this)'>";
+                    card += "<div class='card' pageId=" + resultData2.id + " onclick='pageSearchApp2.onClickCard(this)'>";
                     card += "<img src='" + resultData2.picture.data.url + "'>";
                     card += "<div class='card-body'>";
                     card += "<h4><b>" + resultData2.name + "</b></h4>";
