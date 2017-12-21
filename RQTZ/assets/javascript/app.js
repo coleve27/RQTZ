@@ -15,7 +15,7 @@ let pageSearchApp = {
             pagesContainer = document.getElementById("pagesContainer"),
             apiUrl = "https://graph.facebook.com/v2.11/search?q=",
             ////UPDATE THIS ACCESS TOKEN AS NECESSARY
-            access_token = "EAAbZBeNZCvO5kBAJTZAqRKE4q55iXlpD0ElWSmbZB1wYi6ypkc4Y2ZBcGkexZCSmCvjiOFIbpYgn0pphee6ZAR8vBmPUhQu3jKSIVEDAXQOxViBhlz6PdeFZC2tgTV36YdGihRMCJA6kbzyoaRic1nDljEJuFfThT5H9taUG6mRZBnv9ytPvq9ofYb1DhFiDcOBcZD";
+            access_token = "EAACEdEose0cBAKiqU3GjvO6s6SwC8cgal19QpHDv5NLZCVvb1pKB3tRFVgLZArJ6Ao4ZAsqeI2f5fvXNSFSbJYdPNb7l6lwu1TwvB56ROeUoYIs6oDnpagmcnJgwPrQdkBDIgNRsMQu67PzTSl7oNA5YXu3KUCQxFn2YOlXFoilJj6DAAbaXEgtoe1r2JDNh8f2sih92gZDZD";
 
         if (searchField.value != "") {
             pagesContainer.innerHTML = "";
@@ -47,17 +47,9 @@ let pageSearchApp = {
                 response.forEach(function (resultData) {
                     var card = "";
                     console.log(resultData);
-<<<<<<< Updated upstream
                  //   console.log("post test: "+resultData.posts.data[1].created_time); // VERY IMPORTANT: Create a function that counts how many posts in the past month
                   //  console.log("engagement id test: "+resultData.engagement.count);
 
-=======
-              
-                    for (i = 0; i < resultData.posts.data.length; i++) {
-                        console.log("Posts: " + resultData.posts.data[i].created_time.length);
-                        let temp1 = resultData.posts.data[i].created_time;
-                    };
->>>>>>> Stashed changes
 
                     card += "<div class='card col-md-2' pageId=" + resultData.id + " onclick='pageSearchApp.onClickCard(this)'>";
                     card += "<img src='" + resultData.picture.data.url + "'>";
@@ -65,7 +57,7 @@ let pageSearchApp = {
                     card += "<h4><b>" + resultData.name + "</b></h4>";
                     card += "<p>" + resultData.category + "</p>";
                     card += "<p>Likes: " + resultData.engagement.social_sentence + "</p>";
-                    card += "<p>Total Posts for December: " + resultData.posts.data[0].created_time.length + "</p>";
+                    card += "<p>Total Posts for December: " + resultData.posts.data.length + "</p>";
                     card += "</div>";
                     card += "</div>";
                     dom += card;
@@ -103,7 +95,7 @@ let pageSearchApp2 = {
             pagesContainer2 = document.getElementById("pagesContainer2"),
             apiUrl2 = "https://graph.facebook.com/v2.11/search?q=",
             ////UPDATE THIS ACCESS TOKEN AS NECESSARY
-            access_token = "EAAbZBeNZCvO5kBAJTZAqRKE4q55iXlpD0ElWSmbZB1wYi6ypkc4Y2ZBcGkexZCSmCvjiOFIbpYgn0pphee6ZAR8vBmPUhQu3jKSIVEDAXQOxViBhlz6PdeFZC2tgTV36YdGihRMCJA6kbzyoaRic1nDljEJuFfThT5H9taUG6mRZBnv9ytPvq9ofYb1DhFiDcOBcZD";
+            access_token = "EAACEdEose0cBAKiqU3GjvO6s6SwC8cgal19QpHDv5NLZCVvb1pKB3tRFVgLZArJ6Ao4ZAsqeI2f5fvXNSFSbJYdPNb7l6lwu1TwvB56ROeUoYIs6oDnpagmcnJgwPrQdkBDIgNRsMQu67PzTSl7oNA5YXu3KUCQxFn2YOlXFoilJj6DAAbaXEgtoe1r2JDNh8f2sih92gZDZD";
 
 
 
@@ -135,25 +127,28 @@ let pageSearchApp2 = {
             var response = JSON.parse(xhrResponse.response).data,
                 dom = "";
             if (response.length) {
-                response.forEach(function (resultData) {
+                response.forEach(function (resultData2) {
                     var card = "";
-                    console.log(resultData);
+                    console.log(resultData2);
                 
-                    for (i = 0; i < resultData.posts.data.length; i++) {
-                        console.log("Posts: " + resultData.posts.data[i].created_time.length);
-                        let temp1 = resultData.posts.data[i].created_time;
+                    for (i = 0; i < resultData2.posts.data.length; i++) {
+                        console.log("Posts: " + resultData2.posts.data[i].created_time.length);
+                        let temp1 = resultData2.posts.data[i].created_time;
                     };
 
-                    card += "<div class='card col-md-2' pageId=" + resultData.id + " onclick='pageSearchApp2.onClickCard(this)'>";
-                    card += "<img src='" + resultData.picture.data.url + "'>";
+                    card += "<div class='card col-md-2' pageId=" + resultData2.id + " onclick='pageSearchApp2.onClickCard(this)'>";
+                    card += "<img src='" + resultData2.picture.data.url + "'>";
                     card += "<div class='card-body'>";
-                    card += "<h4><b>" + resultData.name + "</b></h4>";
-                    card += "<p>" + resultData.category + "</p>";
-                    card += "<p>Likes: " + resultData.engagement.social_sentence + "</p>";
-                    card += "<p>Total Posts for December: " + resultData.posts.data[0].created_time.length + "</p>";
+                    card += "<h4><b>" + resultData2.name + "</b></h4>";
+                    card += "<p>" + resultData2.category + "</p>";
+                    card += "<p>Likes: " + resultData2.engagement.social_sentence + "</p>";
+                    card += "<p>Total Posts for December: " + resultData2.posts.data.length + "</p>";
                     card += "</div>";
                     card += "</div>";
                     dom += card;
+                    console.log("Result Data 2 Name: " + resultData2.name);
+                    console.log("Result Data 2 length: " + resultData2.posts.data.length);
+
                 });
                 pagesContainer2.innerHTML = dom;
             }
@@ -174,7 +169,6 @@ let pageSearchApp2 = {
 
 };
 
-<<<<<<< Updated upstream
 //GET insights//
 
 var accessToken = "EAACEdEose0cBAHaqLIXJkHjdUhjpZCYa7RVJsj3pQmgEjhrmPZBJx9Lhid4pZCLi1fwcNIGB6JIAN6ATZACxD1TZCNSugUzx2ZAaV0ravxX9hXZBFV8Bs2h8Xpaofufinumzq429HvHAXKnPNGAHHMcpOA6XnHBwtZAFskwYUWofZC857lMYKnRnLZAALZBdvgZCVV0ZD"
@@ -239,77 +233,3 @@ $.ajax({
 //     js.src = "https://connect.facebook.net/en_US/sdk.js";
 //     fjs.parentNode.insertBefore(js, fjs);
 // }(document, 'script', 'facebook-jssdk'));
-=======
-
-
-
-
-
-//initiate Javascript SDK//
-
-window.fbAsyncInit = function () {
-    FB.init({
-        appId: '1968644966792089',
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v2.11'
-    });
-
-    FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-            console.log('Logged in.');
-            var pageID = "kittiesonfleek";
-            var insights = "/" + "insights";
-            var metrics = "/" + "page_impressions";
-            var timePeriod = "/" + "days_28";
-            var accessToken = "?access_token=" + "EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD"
-            var queryURLb = "https://graph.facebook.com/v2.11/" + pageID + insights + engaged_users + timePeriod + accessToken;
-            var queryURLa = "https://graph.facebook.com/v2.11/" + pageID + insights + metrics + timePeriod + accessToken;
-            var engaged_users = "/" + "page_engaged_users";
-            var page_engaged_users = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_engaged_users/days_28/?access_token=EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD";
-            var pageFans = "https://graph.facebook.com/v2.11/kittiesonfleek/insights/page_fans/lifetime/?access_token=EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD";
-         
-            $.ajax({
-                url: queryURLa,
-                method: "GET"
-            }).done(function (response) {
-                //console.log of impressions in the last 28 days//
-                console.log(response.data[0].values[1].value);
-                var impressions = response.data[0].values[1].value;
-                $("#impressions").text("impressions within the last 28 days: " + impressions);
-            });
-
-            $.ajax({
-                url: page_engaged_users,
-                method: "GET"
-            }).done(function (response) {
-                //console.log of impressions in the last 28 days//
-                console.log(response.data[0].values[1].value);
-                var pageEngage = response.data[0].values[1].value;
-                $("#pageEngage").text("page engagement within the last 28 days: " + pageEngage);
-            });
-
-            $.ajax({
-                url: pageFans,
-                method: "GET"
-            }).done(function (response) {
-                //console.log of impressions in the last 28 days//
-                console.log(response.data[0].values[1].value);
-                var pageFans = response.data[0].values[1].value;
-                $("#pageFans").text("page fans over lifetime of page: " + pageFans);
-            });
-        }
-        else {
-            FB.login();
-        }
-    });
-};
-
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
->>>>>>> Stashed changes
