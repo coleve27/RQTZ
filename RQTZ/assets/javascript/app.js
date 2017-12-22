@@ -1,31 +1,25 @@
 /**Facebook Graph API Search **/
 
-/* REMINDER to update the access token!!!!!!! */
+/* REMINDER to update the access token there are two places where they need to be updated!!!!!!! */
 
-document.getElementById("searchBox").focus();
+//document.getElementById("searchBox").focus();
+document.getElementById("searchBox");
+document.getElementById("searchBox2");
+
 let pageSearchApp = {
     loader: document.getElementsByClassName("loader")[0],
 
-    /** Invoked while pressing enter key on searchBox **/
-
-
-    /////////////*From FACEBOOK, Api URL and Access token search tool */////////////////////
-
-    onSearchFieldEnter: function (ev) {
+   onSearchFieldEnter: function (ev) {
         var that = this,
             searchField = document.getElementById("searchBox"),
             pagesContainer = document.getElementById("pagesContainer"),
             apiUrl = "https://graph.facebook.com/v2.11/search?q=",
+            ////UPDATE THIS ACCESS TOKEN AS NECESSARY
             access_token = "EAAbZBeNZCvO5kBAFqFyKEzx7ZCfVuew4VIvq2KSZBiBHjYRAsajP0Al7DBocXbuKZAvM1kjZCUFh37uaWcejRgEmP7t6kLTRFfZAcKb6ZBzA69Xxd1RJ0X1XM4ePvCh8m4ojS8xgFQbV6avheN6VZApZCDZAdQXOh2HZB2IOa3XOTi0jJDUOdcdUKUZCpSvOpiUJ0loXQMp6BvZBkgawZDZD";
-
-           // https://graph.facebook.com/v2.11/search?q=peanut&type=page&limit=6&fields=id,name,about,category,company_overview,posts, bio,engagement,picture,overall_star_rating&access_token=EAACEdEose0cBABlAi0kw53yiW2nuefX6sxpebSpqrBkNHsEGb3A0mB0MaR7ZBoT7hfRZCsZBIv9wnmJenSK99bTxaAUjfR1qLa7ngBVEtiaKU0GFUaTTqZBUOw60GbvUKUpmXq2nj7UBnm2vG63mz0bjdzxITd0N0NZBgShZAPngOcZCS9LuoWwVmP8iN7jzyb1K029zCaicAZDZD
-
-
-
 
         if (searchField.value != "") {
             pagesContainer.innerHTML = "";
-            apiUrl = apiUrl + searchField.value + "&type=page&limit=6&fields=id,name,about,posts,category,company_overview,bio,engagement,picture,overall_star_rating,page_stories&access_token=" + access_token;
+            apiUrl = apiUrl + searchField.value + "&type=page&limit=1&fields=id,name,about,posts,category,company_overview,bio,engagement,picture,overall_star_rating,page_stories&access_token=" + access_token;
             that.createAjaxRequest("GET", apiUrl, that.pageCallbackFunction);
         }
         else {
@@ -35,17 +29,11 @@ let pageSearchApp = {
                                     </pre>";
         }
     },
-    /////////////*From FACEBOOK, Api URL and Access token search tool */////////////////////
 
-
-
-
-    /////////////////*  Makes a div card to display the 5 results of the search query *///////////////////////////
     onClickCard: function (card) {
         window.open("http://facebook.com/" + card.getAttribute("pageid"), "_blank");
     },
 
-    /** callback function for pageApi request **/
     pageCallbackFunction: function (event) {
         var that = this,
             pagesContainer = document.getElementById("pagesContainer"),
@@ -53,10 +41,8 @@ let pageSearchApp = {
             pictureURL, dom = "";
 
         if (xhrResponse.readyState == 4 && xhrResponse.status == 200) {
-            // when document is read, do this
             var response = JSON.parse(xhrResponse.response).data,
                 dom = "";
-            //response from the api query if results found (note: values pulled are id,name,about,category,company_overview,bio,engagement,picture,overall_star_rating)
             if (response.length) {
                 response.forEach(function (resultData) {
                     var card = "";
@@ -65,29 +51,24 @@ let pageSearchApp = {
                   //  console.log("engagement id test: "+resultData.engagement.count);
 
 
-                  console.log("Impressions: " + resultData.posts);
-                    card += "<div class='card col-md-2' pageId=" + resultData.id + " onclick='pageSearchApp.onClickCard(this)'>";
+                    card += "<div class='card' pageId=" + resultData.id + " onclick='pageSearchApp.onClickCard(this)'>";
                     card += "<img src='" + resultData.picture.data.url + "'>";
                     card += "<div class='card-body'>";
                     card += "<h4><b>" + resultData.name + "</b></h4>";
                     card += "<p>" + resultData.category + "</p>";
-                    card += "<p>" + resultData.posts + "</p>";
                     card += "<p>Likes: " + resultData.engagement.social_sentence + "</p>";
-                    //console.log("People who Like this: " + resultData.engagement.count);
+                    card += "<p>Total Posts for December: " + resultData.posts.data.length + "</p>";
                     card += "</div>";
                     card += "</div>";
                     dom += card;
                 });
                 pagesContainer.innerHTML = dom;
             }
-            //if no response are found
             else {
                 pagesContainer.innerHTML = "<h1>No Results Found.</h1>";
             }
         }
     },
-    /////////////////*Makes a div card to display the 5 results of the search query *///////////////////////////
-
 
     //////////////** An utility method for making Ajax calls **//////////////////////////
     createAjaxRequest: function (method, apiUrl, callbackFn) {
@@ -99,6 +80,92 @@ let pageSearchApp = {
         xhttp.onreadystatechange = callbackFn.bind(that);
     },
 
+};
+
+
+
+let pageSearchApp2 = {
+    loader: document.getElementsByClassName("loader")[0],
+
+    /** Invoked while pressing enter key on searchBox **/
+    /////////////*From FACEBOOK, Api URL and Access token search tool */////////////////////
+    onSearchFieldEnter: function (ev) {
+        var that = this,
+            searchField = document.getElementById("searchBox2"),
+            pagesContainer2 = document.getElementById("pagesContainer2"),
+            apiUrl2 = "https://graph.facebook.com/v2.11/search?q=",
+            ////UPDATE THIS ACCESS TOKEN AS NECESSARY
+            access_token = "EAAbZBeNZCvO5kBAFqFyKEzx7ZCfVuew4VIvq2KSZBiBHjYRAsajP0Al7DBocXbuKZAvM1kjZCUFh37uaWcejRgEmP7t6kLTRFfZAcKb6ZBzA69Xxd1RJ0X1XM4ePvCh8m4ojS8xgFQbV6avheN6VZApZCDZAdQXOh2HZB2IOa3XOTi0jJDUOdcdUKUZCpSvOpiUJ0loXQMp6BvZBkgawZDZD";
+
+
+
+        if (searchField.value != "") {
+            pagesContainer2.innerHTML = "";
+            apiUrl2 = apiUrl2 + searchField.value + "&type=page&limit=1&fields=id,name,about,posts,category,company_overview,bio,engagement,picture,overall_star_rating,page_stories&access_token=" + access_token;
+            that.createAjaxRequest("GET", apiUrl2, that.pageCallbackFunction);
+            console.log("This is Search2");
+        }
+        else {
+            pagesContainer2.innerHTML = "<pre>\
+                                        <h1>No Page name was entered.</h1>\
+                                        <h1>Please enter the page to be searched...</h1>\
+                                    </pre>";
+        }
+    },
+
+    onClickCard: function (card) {
+        window.open("http://facebook.com/" + card.getAttribute("pageid"), "_blank");
+    },
+
+    pageCallbackFunction: function (event) {
+        var that = this,
+            pagesContainer2 = document.getElementById("pagesContainer2"),
+            xhrResponse = event.currentTarget,
+            pictureURL, dom = "";
+
+        if (xhrResponse.readyState == 4 && xhrResponse.status == 200) {
+            var response = JSON.parse(xhrResponse.response).data,
+                dom = "";
+            if (response.length) {
+                response.forEach(function (resultData2) {
+                    var card = "";
+                    console.log(resultData2);
+
+                    for (i = 0; i < resultData2.posts.data.length; i++) {
+                        console.log("Posts: " + resultData2.posts.data[i].created_time.length);
+                        let temp1 = resultData2.posts.data[i].created_time;
+                    };
+
+                    card += "<div class='card' pageId=" + resultData2.id + " onclick='pageSearchApp2.onClickCard(this)'>";
+                    card += "<img src='" + resultData2.picture.data.url + "'>";
+                    card += "<div class='card-body'>";
+                    card += "<h4><b>" + resultData2.name + "</b></h4>";
+                    card += "<p>" + resultData2.category + "</p>";
+                    card += "<p>Likes: " + resultData2.engagement.social_sentence + "</p>";
+                    card += "<p>Total Posts for December: " + resultData2.posts.data.length + "</p>";
+                    card += "</div>";
+                    card += "</div>";
+                    dom += card;
+                    console.log("Result Data 2 Name: " + resultData2.name);
+                    console.log("Result Data 2 length: " + resultData2.posts.data.length);
+
+                });
+                pagesContainer2.innerHTML = dom;
+            }
+            else {
+                pagesContainer2.innerHTML = "<h1>No Results Found.</h1>";
+            }
+        }
+    },
+
+    createAjaxRequest: function (method, apiUrl2, callbackFn) {
+        var xhttp2 = new XMLHttpRequest(),
+            that = this;
+
+        xhttp2.open(method, apiUrl2, true);
+        xhttp2.send();
+        xhttp2.onreadystatechange = callbackFn.bind(that);
+    },
 
 };
 
@@ -140,29 +207,29 @@ $.ajax({
 });
 
 
-//initiate Javascript SDK//
-window.fbAsyncInit = function () {
-    FB.init({
-        appId: '1968644966792089',
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v2.11'
-    });
-
-    FB.getLoginStatus(function (response) {
-        if (response.status === 'connected') {
-            console.log('Logged in.');
-        }
-        else {
-            FB.login();
-        }
-    });
-};
-
-(function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+// var initiate Javascript SDK//
+// window.fbAsyncInit = function () {
+//     FB.init({
+//         appId: '1968644966792089',
+//         autoLogAppEvents: true,
+//         xfbml: true,
+//         version: 'v2.11'
+//     });
+//
+//     FB.getLoginStatus(function (response) {
+//         if (response.status === 'connected') {
+//             console.log('Logged in.');
+//         }
+//         else {
+//             FB.login();
+//         }
+//     });
+// };
+//
+// (function (d, s, id) {
+//     var js, fjs = d.getElementsByTagName(s)[0];
+//     if (d.getElementById(id)) { return; }
+//     js = d.createElement(s); js.id = id;
+//     js.src = "https://connect.facebook.net/en_US/sdk.js";
+//     fjs.parentNode.insertBefore(js, fjs);
+// }(document, 'script', 'facebook-jssdk'));
